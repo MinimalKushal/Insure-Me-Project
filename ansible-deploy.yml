@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  connection: ssh
+  tasks:
+    - name: apt update
+      command: sudo apt update
+    - name: install docker
+      command: sudo apt install docker.io -y
+    - name: start docker
+      command: service docker start
+    - name: seploy insure me project by running it in container
+      command: docker run -itd -p 8080:8081 --name=insureme minimalkushal/insureme:latest
